@@ -32,7 +32,7 @@ public class GitHub {
 		Git git=gitTool.cloneRepository(PATH.get(0), BRANCH);
 		Document doc = xmlTool.getXMLDocument(PATH.get(0)+"/pom.xml");
 		double version = xmlTool.readPomVersion(doc);
-		version = version * 10000 + 1000 / 10000;		
+		version = (version * 10000 + 1000) / 10000;		
 		for (String path : PATH) {
 			xmlTool.rewriteVersioneAutomatica(doc, version, path+"/pom.xml");
 			System.out.println("effettuato modifica path "+path+"/pom.xml");
