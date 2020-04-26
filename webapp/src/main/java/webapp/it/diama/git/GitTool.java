@@ -60,7 +60,7 @@ public class GitTool {
 		coCmd.setCreateBranch(false);
 		coCmd.call();
 		
-		MergeResult mgCmd = git.merge().call();;
+		MergeResult mgCmd = git.merge().call();
 	}
 
 }
