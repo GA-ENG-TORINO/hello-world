@@ -25,7 +25,6 @@ import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.api.errors.UnmergedPathsException;
 import org.eclipse.jgit.api.errors.WrongRepositoryStateException;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 public class GitTool {
@@ -50,17 +49,17 @@ public class GitTool {
 		fileAuto.load(fileInputStream);
 		git.commit().setMessage("auto commit versione " + version).call();
 		git.push().setCredentialsProvider(
-				new UsernamePasswordCredentialsProvider(fileAuto.getProperty("user"), fileAuto.getProperty("password")))
+				new UsernamePasswordCredentialsProvider(fileAuto.getProperty("user"), fileAuto.getProperty("paasword")))
 				.call();
 	}
 
-	public void merge(Git git,String branch) throws RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException, GitAPIException {
+	public void merge(Git git, String branch) throws RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException, GitAPIException {
 		CheckoutCommand coCmd = git.checkout(); 
-		coCmd.setName("sviluppo");
-		coCmd.setCreateBranch(false);
-		coCmd.call();
-		
-		MergeResult mgCmd = git.merge().call();
+		coCmd.setName("master");
+		coCmd.setCreateBranch(false); // probably not needed, just to make sure
+		coCmd.call(); // switch to "master" branch
+
+		MergeResult mgCmd = git.merge().call(); // actually do the merge		
 	}
 
 }

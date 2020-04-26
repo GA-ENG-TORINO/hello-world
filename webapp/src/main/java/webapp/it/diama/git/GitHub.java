@@ -37,7 +37,6 @@ public class GitHub {
 			xmlTool.rewriteVersioneAutomatica(doc, version, path+"/pom.xml");
 			System.out.println("effettuato modifica path "+path+"/pom.xml");
 		}
-		
 		gitTool.merge(git,BRANCH);
 		gitTool.push(git, version);
 	}
