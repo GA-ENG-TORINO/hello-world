@@ -8,16 +8,24 @@ import java.util.Arrays;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.CheckoutCommand;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.MergeCommand;
+import org.eclipse.jgit.api.MergeResult;
 import org.eclipse.jgit.api.errors.AbortedByHookException;
+import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.ConcurrentRefUpdateException;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRefNameException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.api.errors.NoMessageException;
+import org.eclipse.jgit.api.errors.RefAlreadyExistsException;
+import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.api.errors.UnmergedPathsException;
 import org.eclipse.jgit.api.errors.WrongRepositoryStateException;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 public class GitTool {
@@ -42,8 +50,17 @@ public class GitTool {
 		fileAuto.load(fileInputStream);
 		git.commit().setMessage("auto commit versione " + version).call();
 		git.push().setCredentialsProvider(
-				new UsernamePasswordCredentialsProvider(fileAuto.getProperty("user"), fileAuto.getProperty("paasword")))
+				new UsernamePasswordCredentialsProvider(fileAuto.getProperty("user"), fileAuto.getProperty("password")))
 				.call();
+	}
+
+	public void merge(Git git,String branch) throws RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException, GitAPIException {
+		CheckoutCommand coCmd = git.checkout(); 
+		coCmd.setName("sviluppo");
+		coCmd.setCreateBranch(false);
+		coCmd.call();
+		
+		MergeResult mgCmd = git.merge().call();;
 	}
 
 }
