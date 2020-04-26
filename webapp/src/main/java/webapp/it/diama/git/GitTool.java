@@ -55,7 +55,7 @@ public class GitTool {
 
 	public void merge(Git git, String branch) throws RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException, GitAPIException {
 		CheckoutCommand coCmd = git.checkout(); 
-		coCmd.setName("master");
+		coCmd.setName(branch);
 		coCmd.setCreateBranch(false); // probably not needed, just to make sure
 		coCmd.call(); // switch to "master" branch
 
