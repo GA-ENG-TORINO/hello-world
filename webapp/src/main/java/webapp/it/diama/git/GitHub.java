@@ -1,6 +1,7 @@
 package webapp.it.diama.git;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class GitHub {
 	private static final String BRANCH = "refs/heads/sviluppo";
 
 	public static void addPushAutomatico() throws IOException, InvalidRemoteException, TransportException,
-			GitAPIException, ParserConfigurationException, SAXException, TransformerException {
+			GitAPIException, ParserConfigurationException, SAXException, TransformerException, URISyntaxException {
 		GitTool gitTool = new GitTool();
 		XMLTool xmlTool = new XMLTool();
 		gitTool.deleteRepository(PATH.get(0));
@@ -37,8 +38,8 @@ public class GitHub {
 			xmlTool.rewriteVersioneAutomatica(doc, version, path+"/pom.xml");
 			System.out.println("effettuato modifica path "+path+"/pom.xml");
 		}
-		gitTool.merge(git,BRANCH);
-		gitTool.push(git, version);
+		///gitTool.merge(git,PATH.get(0),BRANCH);
+		gitTool.push(git,PATH.get(0), BRANCH, version);
 	}
 
 }
