@@ -26,7 +26,7 @@ public class XMLToolTest {
 
 	@Test
 	public void testPomVersion() throws Exception {
-		doc=xml.xml(PATH);
+		doc=xml.getXMLDocument(PATH);
 		System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 		doc.getChildNodes();
 		Node nNode = (Node) doc.getElementsByTagName("project").item(0);
@@ -43,10 +43,10 @@ public class XMLToolTest {
 	}
 
 	@Test
-	public void testRewriteVersion() throws Exception {
+	public void testRewriteVersioneAutomatica() throws Exception {
 		testReadPomVersion();
 		version=(version*10+1)/10;
-		xml.rewriteVersion(doc, version, PATH);
+		xml.rewriteVersioneAutomatica(doc, version, PATH);
 		testReadPomVersion();
 	}
 	

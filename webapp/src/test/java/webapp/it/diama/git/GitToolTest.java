@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class GitToolTest {
 	GitTool gitTool=new GitTool();
+	
 
 	@Before
 	public void setUp() throws Exception {

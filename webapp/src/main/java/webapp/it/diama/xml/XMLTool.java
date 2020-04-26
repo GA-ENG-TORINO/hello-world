@@ -21,7 +21,7 @@ import org.xml.sax.SAXException;
 
 public class XMLTool {
 	
-	public Document xml(String path) throws ParserConfigurationException, SAXException, IOException {
+	public Document getXMLDocument(String path) throws ParserConfigurationException, SAXException, IOException {
 		File fXmlFile = new File(path);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -47,7 +47,7 @@ public class XMLTool {
 		return nNode;
 	}
 	
-	public void rewriteVersion(Document doc,double version,String path) throws TransformerException {
+	public void rewriteVersioneAutomatica(Document doc,double version,String path) throws TransformerException {
 		Node nNode = getVersion(doc);
 		nNode.setTextContent(String.valueOf(version));
 		
@@ -57,5 +57,7 @@ public class XMLTool {
 		StreamResult result = new StreamResult(new File(path));
 		transformer.transform(source, result);
 	}
+	
+
 
 }
