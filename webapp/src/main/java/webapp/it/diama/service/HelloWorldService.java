@@ -28,7 +28,7 @@ public class HelloWorldService {
     
     @GET
     @Path("/push")
-    public Response push(@PathParam("name") String msg) {
+    public Response push() {
 			try {
 				GitHub.addPushAutomatico();
 			} catch (IOException | GitAPIException | ParserConfigurationException | SAXException | TransformerException
