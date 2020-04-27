@@ -42,8 +42,13 @@ public class GitTool {
 		return git;
 	}
 
-	public void deleteRepository(String path) throws IOException {
-		FileUtils.deleteDirectory(new File(path));
+	public void deleteRepository(String path){		
+		try {
+			FileUtils.deleteDirectory(new File(path));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void push(Git git, String PATH, String branch, double version)

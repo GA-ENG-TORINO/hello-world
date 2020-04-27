@@ -16,7 +16,7 @@ public class GitHubTest {
 
 	@Test
 	public void testAddPushAutomatico() throws Exception {
-		//GitHub.addPushAutomatico();
+		GitHub.addPushAutomatico();
 		System.out.println("Test Case Bypassato, in produzione jenkins in fase di deploy committa una nuova versione ogni minuto");
 	}
 
