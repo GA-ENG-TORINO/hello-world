@@ -23,15 +23,15 @@ public class GitHub {
 			System.getProperty("user.home") + "/gitRemoto",
 			System.getProperty("user.home") + "/gitRemoto/server",
 			System.getProperty("user.home") + "/gitRemoto/webapp");
-	private static final String BRANCH = "refs/heads/sviluppo";
+	private static final String BRANCH = "refs/heads/master";
 
 	public static void addPushAutomatico() throws IOException, InvalidRemoteException, TransportException,
 			GitAPIException, ParserConfigurationException, SAXException, TransformerException, URISyntaxException {
 		GitTool gitTool = new GitTool();
 		XMLTool xmlTool = new XMLTool();
-		gitTool.deleteRepository(PATH.get(0));
+		gitTool.deleteRepository(PATH.get(0));		
+		Git git=gitTool.cloneRepository(PATH.get(0), BRANCH);
 		Document doc = xmlTool.getXMLDocument(PATH.get(0)+"/pom.xml");
-		Git git=gitTool.cloneRepository(PATH.get(0), BRANCH);		
 		double version = xmlTool.readPomVersion(doc);
 		version = (version * 10000 + 1000) / 10000;		
 		for (String path : PATH) {
@@ -40,7 +40,7 @@ public class GitHub {
 			System.out.println("effettuato modifica path "+path+"/pom.xml");
 		}
 		///gitTool.merge(git,PATH.get(0),BRANCH);
-		gitTool.push(git,PATH.get(0), BRANCH, version);
+		//gitTool.push(git,PATH.get(0), BRANCH, version);
 	}
 
 }

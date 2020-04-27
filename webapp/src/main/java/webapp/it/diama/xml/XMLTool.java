@@ -26,7 +26,6 @@ public class XMLTool {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(fXmlFile);
-		doc.getDocumentElement().normalize();
 		return doc;
 	}
 	
@@ -38,8 +37,8 @@ public class XMLTool {
 	private Node getVersion(Document doc) {
 		Node nNode = getProgetNode(doc);
 		Element eElement = (Element) nNode;
-		Node verision=eElement.getElementsByTagName("version").item(0);
-		return verision;
+		Node version=eElement.getElementsByTagName("version").item(0);
+		return version;
 	}
 
 	private Node getProgetNode(Document doc) {

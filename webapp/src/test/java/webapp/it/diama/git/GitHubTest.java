@@ -2,7 +2,7 @@ package webapp.it.diama.git;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class GitHubTest {
 
@@ -16,7 +16,7 @@ public class GitHubTest {
 
 	@Test
 	public void testAddPushAutomatico() throws Exception {
-		//GitHub.addPushAutomatico();
+		GitHub.addPushAutomatico();
 	}
 
 }

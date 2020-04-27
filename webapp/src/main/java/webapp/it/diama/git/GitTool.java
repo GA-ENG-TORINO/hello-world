@@ -62,12 +62,12 @@ public class GitTool {
           .call();
 		
 		RemoteAddCommand remoteAddCommand = git.remoteAdd();
-	      remoteAddCommand.setName("sviluppo");
+	      remoteAddCommand.setName("master");
 	      remoteAddCommand.setUri(new URIish("git@github.com:GA-ENG-TORINO/hello-world.git"));
 	      remoteAddCommand.call();
 	      
 	      PushCommand pushCommand = git.push();
-	      pushCommand.add("sviluppo");
+	      pushCommand.add("master");
 	      pushCommand.setRemote("origin");
 	      pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(fileAuto.getProperty("user"), fileAuto.getProperty("password")));
 	      pushCommand.call();
