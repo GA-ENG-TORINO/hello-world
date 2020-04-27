@@ -49,11 +49,12 @@ public class HelloWorldService {
 	public Response version() {
 
 		try {
-			String res = "/META-INF/maven/com.example.maven-project/webapp/pom.properties";
+			String res = "META-INF/maven/com.example.maven-project/webapp/pom.properties";
 			InputStream resourceAsStream = this.getClass()
 					.getResourceAsStream(res);
 			Properties fileAuto = new Properties();
 			fileAuto.load(resourceAsStream);
+			
 			return Response.status(200).entity(fileAuto.getProperty("version")).build();
 		} catch (IOException e) {
 			return Response.status(500).entity(e.getStackTrace()).build();
