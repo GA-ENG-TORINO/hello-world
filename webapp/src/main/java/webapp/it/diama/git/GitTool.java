@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FileDeleteStrategy;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.CheckoutCommand;
 import org.eclipse.jgit.api.Git;
@@ -44,7 +45,7 @@ public class GitTool {
 
 	public void deleteRepository(String path){		
 		try {
-			FileUtils.deleteDirectory(new File(path));
+			FileDeleteStrategy.FORCE.delete(new File(path));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
