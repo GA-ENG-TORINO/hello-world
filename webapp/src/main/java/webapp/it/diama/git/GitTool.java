@@ -76,12 +76,11 @@ public class GitTool {
 	      pushCommand.add("master");
 	      pushCommand.setRemote("origin");
 	      pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(fileAuto.getProperty("user"), fileAuto.getProperty("password")));
-	      pushCommand.call();
-		
-//		git.push().setRefSpecs(specs)
-//		.setCredentialsProvider(
-//				new UsernamePasswordCredentialsProvider(fileAuto.getProperty("user"), fileAuto.getProperty("password")))
-//				.call();
+	      pushCommand.call();	
+	      
+	      localGit.getRepository().close();
+	      git.getRepository().close();
+
 	}
 
 	public void merge(Git git, String branch) throws RefAlreadyExistsException, RefNotFoundException,

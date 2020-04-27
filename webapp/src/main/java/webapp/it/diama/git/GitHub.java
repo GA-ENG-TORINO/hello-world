@@ -42,6 +42,7 @@ public class GitHub {
 		}
 		///gitTool.merge(git,PATH.get(0),BRANCH);
 		gitTool.push(git,PATH.get(0), BRANCH, version);
+		
 	}
 
 }
