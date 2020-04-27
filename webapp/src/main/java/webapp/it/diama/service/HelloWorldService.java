@@ -53,11 +53,22 @@ public class HelloWorldService {
 			InputStream resourceAsStream = this.getClass()
 					.getResourceAsStream(res);
 			Properties fileAuto = new Properties();
-			fileAuto.load(resourceAsStream);
-			
+			fileAuto.load(resourceAsStream);			
 			return Response.status(200).entity(fileAuto.getProperty("version")).build();
-		} catch (IOException e) {
-			return Response.status(500).entity(e.getStackTrace()).build();
+		} catch (Exception e) {
+			String res =System.getProperty("catalina.base").replace("\\", "/")+"/webapps/webapp/META-INF/maven/com.example.maven-project/webapp/pom.properties";
+			Properties fileAuto = new Properties();
+			File file=new File(res);
+			FileInputStream fileInputStream;
+			try {
+				fileInputStream = new FileInputStream(file);
+				fileAuto.load(fileInputStream );				
+				return Response.status(200).entity(fileAuto.get("version")).build();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return Response.status(200).entity(res).build();
 		}
 	}
 }
