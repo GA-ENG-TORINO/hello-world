@@ -16,7 +16,7 @@ public class GitHubTest {
 
 	@Test
 	public void testAddPushAutomatico() throws Exception {
-		GitHub.addPushAutomatico();
+		//GitHub.addPushAutomatico();
 	}
 
 }

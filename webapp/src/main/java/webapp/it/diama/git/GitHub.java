@@ -30,11 +30,12 @@ public class GitHub {
 		GitTool gitTool = new GitTool();
 		XMLTool xmlTool = new XMLTool();
 		gitTool.deleteRepository(PATH.get(0));
-		Git git=gitTool.cloneRepository(PATH.get(0), BRANCH);
 		Document doc = xmlTool.getXMLDocument(PATH.get(0)+"/pom.xml");
+		Git git=gitTool.cloneRepository(PATH.get(0), BRANCH);		
 		double version = xmlTool.readPomVersion(doc);
 		version = (version * 10000 + 1000) / 10000;		
 		for (String path : PATH) {
+			doc = xmlTool.getXMLDocument(path+"/pom.xml");
 			xmlTool.rewriteVersioneAutomatica(doc, version, path+"/pom.xml");
 			System.out.println("effettuato modifica path "+path+"/pom.xml");
 		}

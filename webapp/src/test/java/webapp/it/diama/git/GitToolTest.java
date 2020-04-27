@@ -21,15 +21,18 @@ public class GitToolTest {
 	public void tearDown() throws Exception {
 	}
 	
-	@Test
-	public void cloneRepository() throws InvalidRemoteException, TransportException, GitAPIException {
-		gitTool.cloneRepository(System.getProperty("user.home")+"/gitRemoto", "refs/heads/sviluppo");
-	}
 	
 	@Test
 	public void deleteRepository() throws IOException {		
 		gitTool.deleteRepository(System.getProperty("user.home")+"/gitRemoto");
 	}
+	
+	@Test
+	public void cloneRepository() throws InvalidRemoteException, TransportException, GitAPIException {
+		gitTool.cloneRepository(System.getProperty("user.home")+"/gitRemoto", "refs/heads/sviluppo");
+	}
+	
+
 	
 	
 }
