@@ -10,11 +10,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import webapp.it.diama.git.GitHub.TIPO;
+
 public class XMLToolTest {
 	private static final String PATH = System.getProperty("user.home")+"/gitRemoto/pom.xml";
 	XMLTool xml = new XMLTool();
 	Document doc;
 	double version;
+	
 
 	@BeforeEach
 	protected void setUp() throws Exception {
@@ -38,7 +41,7 @@ public class XMLToolTest {
 	@Test
 	public void testReadPomVersion() throws Exception {
 		testPomVersion();
-		version=xml.readPomVersion(doc);
+		version=xml.readPomVersion(doc,TIPO.ROOT);
 		System.out.println(version);
 	}
 
@@ -46,7 +49,7 @@ public class XMLToolTest {
 	public void testRewriteVersioneAutomatica() throws Exception {
 		testReadPomVersion();
 		version=(version*10+1)/10;
-		xml.rewriteVersioneAutomatica(doc, version, PATH);
+		xml.rewriteVersioneAutomatica(doc, version, PATH,TIPO.ROOT);
 		testReadPomVersion();
 	}
 	

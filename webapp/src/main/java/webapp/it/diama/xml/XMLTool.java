@@ -17,6 +17,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+import webapp.it.diama.git.GitHub.TIPO;
+
 
 
 public class XMLTool {
@@ -29,25 +31,33 @@ public class XMLTool {
 		return doc;
 	}
 	
-	public double readPomVersion(Document doc) {
-		Node verision = getVersion(doc);
+	public double readPomVersion(Document doc,TIPO tipo) {
+		Node verision = getVersion(doc,tipo);
 		return Double.valueOf(verision.getTextContent());
 	}
 
-	private Node getVersion(Document doc) {
-		Node nNode = getProgetNode(doc);
+	private Node getVersion(Document doc,TIPO tipo) {
+		Node nNode = null;
+		if(tipo==tipo.ROOT)
+			nNode = getProjectNode(doc);
+		else nNode = getParentNode(doc);
 		Element eElement = (Element) nNode;
 		Node version=eElement.getElementsByTagName("version").item(0);
 		return version;
 	}
 
-	private Node getProgetNode(Document doc) {
+	private Node getParentNode(Document doc) {
+		Node nNode = (Node) doc.getElementsByTagName("parent").item(0);
+		return nNode;		
+	}
+
+	private Node getProjectNode(Document doc) {
 		Node nNode = (Node) doc.getElementsByTagName("project").item(0);
 		return nNode;
 	}
 	
-	public void rewriteVersioneAutomatica(Document doc,double version,String path) throws TransformerException {
-		Node nNode = getVersion(doc);
+	public void rewriteVersioneAutomatica(Document doc,double version,String path, TIPO tipo) throws TransformerException {
+		Node nNode = getVersion(doc,tipo);
 		nNode.setTextContent(String.valueOf(version));
 		
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -56,6 +66,8 @@ public class XMLTool {
 		StreamResult result = new StreamResult(new File(path));
 		transformer.transform(source, result);
 	}
+
+
 	
 
 

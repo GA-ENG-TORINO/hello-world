@@ -24,6 +24,7 @@ public class GitHub {
 			System.getProperty("user.home") + "/gitRemoto/server",
 			System.getProperty("user.home") + "/gitRemoto/webapp");
 	private static final String BRANCH = "refs/heads/master";
+	public enum TIPO{ROOT,CHILD}
 
 	public static void addPushAutomatico() throws IOException, InvalidRemoteException, TransportException,
 			GitAPIException, ParserConfigurationException, SAXException, TransformerException, URISyntaxException {
@@ -32,11 +33,11 @@ public class GitHub {
 		gitTool.deleteRepository(PATH.get(0));		
 		Git git=gitTool.cloneRepository(PATH.get(0), BRANCH);
 		Document doc = xmlTool.getXMLDocument(PATH.get(0)+"/pom.xml");
-		double version = xmlTool.readPomVersion(doc);
+		double version = xmlTool.readPomVersion(doc,TIPO.ROOT);
 		version = (version * 10000 + 1000) / 10000;		
 		for (String path : PATH) {
-			doc = xmlTool.getXMLDocument(path+"/pom.xml");
-			xmlTool.rewriteVersioneAutomatica(doc, version, path+"/pom.xml");
+			doc = xmlTool.getXMLDocument(path+"/pom.xml");		
+			xmlTool.rewriteVersioneAutomatica(doc, version, path+"/pom.xml",path.endsWith("/gitRemoto")?TIPO.ROOT:TIPO.CHILD);
 			System.out.println("effettuato modifica path "+path+"/pom.xml");
 		}
 		///gitTool.merge(git,PATH.get(0),BRANCH);
