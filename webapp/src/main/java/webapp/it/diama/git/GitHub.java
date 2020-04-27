@@ -20,9 +20,9 @@ import webapp.it.diama.xml.XMLTool;
 public class GitHub {
 
 	private static final List<String> PATH = Arrays.asList(
-			System.getProperty("user.home") + "/gitRemoto",
-			System.getProperty("user.home") + "/gitRemoto/server",
-			System.getProperty("user.home") + "/gitRemoto/webapp");
+			"/gitRemoto",
+			"/gitRemoto/server",
+			"/gitRemoto/webapp");
 	private static final String BRANCH = "refs/heads/master";
 	public enum TIPO{ROOT,CHILD}
 

@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
@@ -55,7 +57,7 @@ public class GitTool {
 	public void push(Git git, String PATH, String branch, double version)
 			throws NoHeadException, NoMessageException, UnmergedPathsException, ConcurrentRefUpdateException,
 			WrongRepositoryStateException, AbortedByHookException, GitAPIException, IOException, URISyntaxException {
-		File file = new File(System.getProperty("user.home") + "/GitHub.properties");
+		File file = new File("/GitHub.properties");
 		FileInputStream fileInputStream = new FileInputStream(file);
 		Properties fileAuto = new Properties();
 		fileAuto.load(fileInputStream);
