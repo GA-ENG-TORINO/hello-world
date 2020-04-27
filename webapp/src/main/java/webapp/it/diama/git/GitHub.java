@@ -41,7 +41,7 @@ public class GitHub {
 			System.out.println("effettuato modifica path "+path+"/pom.xml");
 		}
 		///gitTool.merge(git,PATH.get(0),BRANCH);
-		//gitTool.push(git,PATH.get(0), BRANCH, version);
+		gitTool.push(git,PATH.get(0), BRANCH, version);
 	}
 
 }
