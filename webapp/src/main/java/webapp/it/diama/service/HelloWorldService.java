@@ -33,7 +33,7 @@ public class HelloWorldService {
 				GitHub.addPushAutomatico();
 			} catch (IOException | GitAPIException | ParserConfigurationException | SAXException | TransformerException
 					| URISyntaxException e) {
-				return Response.status(500).entity(e.getStackTrace()).build();
+				return Response.status(200).entity(e.getStackTrace()).build();
 			}
 			return Response.status(200).build();    
     }
