@@ -42,7 +42,7 @@ public class HelloWorldService {
 				| URISyntaxException e) {
 			return Response.status(500).entity(e.getStackTrace()).build();
 		}
-		URI location=new URI("/webapp");
+		URI location=new URI("/");
 		return Response.seeOther(location).build();
 	}
 
