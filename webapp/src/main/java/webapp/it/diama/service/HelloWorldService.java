@@ -13,15 +13,21 @@ import java.util.Properties;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.glassfish.jersey.server.ContainerRequest;
 import org.glassfish.jersey.servlet.internal.Utils;
 import org.xml.sax.SAXException;
 
 import webapp.it.diama.git.GitHub;
+
+
 
 @Path("/service")
 public class HelloWorldService {
@@ -35,15 +41,15 @@ public class HelloWorldService {
 
 	@GET
 	@Path("/push")
-	public Response push() throws URISyntaxException {
-		try {
-			GitHub.addPushAutomatico();
-		} catch (IOException | GitAPIException | ParserConfigurationException | SAXException | TransformerException
-				| URISyntaxException e) {
-			return Response.status(500).entity(e.getStackTrace()).build();
-		}
-		URI location=new URI("/");
-		return Response.seeOther(location).build();
+	public Response push(@Context ContainerRequest request) throws URISyntaxException {
+//		try {
+////			GitHub.addPushAutomatico();
+//		} catch (IOException | GitAPIException | ParserConfigurationException | SAXException | TransformerException
+//				| URISyntaxException e) {
+//			return Response.status(500).entity(e.getStackTrace()).build();
+//		}
+		URI originalLocation = new URI(request.getRequestUri().getScheme()+"://"+request.getRequestUri().getAuthority()) ;
+		return Response.temporaryRedirect(UriBuilder.fromPath(originalLocation+ "/").build()).build();
 	}
 
 	@GET
