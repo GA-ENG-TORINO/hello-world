@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
@@ -34,14 +35,15 @@ public class HelloWorldService {
 
 	@GET
 	@Path("/push")
-	public Response push() {
+	public Response push() throws URISyntaxException {
 		try {
 			GitHub.addPushAutomatico();
 		} catch (IOException | GitAPIException | ParserConfigurationException | SAXException | TransformerException
 				| URISyntaxException e) {
 			return Response.status(500).entity(e.getStackTrace()).build();
 		}
-		return Response.status(200).build();
+		URI location=new URI("/webapp");
+		return Response.seeOther(location).build();
 	}
 
 	@GET
