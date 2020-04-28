@@ -42,13 +42,13 @@ public class HelloWorldService {
 	@GET
 	@Path("/push")
 	public Response push(@Context ContainerRequest request) throws URISyntaxException {
-//		try {
-////			GitHub.addPushAutomatico();
-//		} catch (IOException | GitAPIException | ParserConfigurationException | SAXException | TransformerException
-//				| URISyntaxException e) {
-//			return Response.status(500).entity(e.getStackTrace()).build();
-//		}
-		URI originalLocation = new URI(request.getRequestUri().getScheme()+"://"+request.getRequestUri().getAuthority()) ;
+		try {
+			GitHub.addPushAutomatico();
+		} catch (IOException | GitAPIException | ParserConfigurationException | SAXException | TransformerException
+				| URISyntaxException e) {
+			return Response.status(500).entity(e.getStackTrace()).build();
+		}
+		URI originalLocation = new URI("https://"+request.getRequestUri().getAuthority()) ;
 		return Response.temporaryRedirect(UriBuilder.fromPath(originalLocation+ "/").build()).build();
 	}
 
