@@ -5,6 +5,9 @@ $(document).ready(function(){
 	
 	
 	setTimeout(function(){
-		location.reload();
+		if(window.location.pathname.indexOf("/riavvio.html") >= 0)
+			window.location.href = window.location.origin
+		else
+			location.reload();
 		}, 60000);
 });
