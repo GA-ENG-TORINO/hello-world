@@ -6,5 +6,5 @@ $(document).ready(function(){
 	
 	setTimeout(function(){
 		location.reload();
-		}, 5000);
+		}, 60000);
 });

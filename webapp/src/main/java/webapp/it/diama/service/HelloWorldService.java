@@ -49,7 +49,7 @@ public class HelloWorldService {
 			return Response.status(500).entity(e.getStackTrace()).build();
 		}
 		URI originalLocation = new URI("https://"+request.getRequestUri().getAuthority()) ;
-		return Response.temporaryRedirect(UriBuilder.fromPath(originalLocation+ "/").build()).build();
+		return Response.temporaryRedirect(UriBuilder.fromPath(originalLocation+ "/riavvio.html").build()).build();
 	}
 
 	@GET
